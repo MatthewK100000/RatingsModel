@@ -19,4 +19,4 @@ You may wish to also impose a count prior on the hypothetical events that rating
 
 ## Examples
 
-![](images/ternary contour.png)
+![](images/ternary_contour.png)
