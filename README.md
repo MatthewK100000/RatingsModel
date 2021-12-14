@@ -13,6 +13,10 @@ For situations where the number of responses is high, the observed proportions w
 
 You may wish to also impose a count prior on the hypothetical events that ratings are assigned. For example, what if there is great incentive for every (or almost every) person to submit their response to a question in a survey? In that case, you'd want to use some heavy tailed discrete distribution, concentrated on the side of 100% turnout. For this purpose, ``RatingsModel`` comes with a ``RightGeometricCountPrior`` class, whose masses follow a geometric sequence. You may use it, or define your own count prior distribution class!* 
 
+Or maybe, out of population that could vote, a subpopulation is sampled and surveyed... how many of those individuals sampled are eligible to vote? In that case use a hypergeometric prior on the counts. 
+
+Or... the counts are time dependent, maybe captured by some queue or other stochastic process? The possibilities are endless.
+
 *your count prior class must have a ``count_rvs()`` method with an argument called ``size``, specifying the number of samples to draw. The input is an integer, and output must be a one-dimensional numpy array of random variables. 
 
 ## Dependencies
