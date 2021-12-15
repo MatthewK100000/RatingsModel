@@ -22,9 +22,10 @@ For example, what if there is great incentive for every (or almost every) person
 
 ## Examples
 #### Header
+To import the model itself, as well as an optional count prior, which comes with the package.
 ```python
 from Ratings import RatingsModel
-from count_priors import RightGeometricCountPrior
+from count_priors import RightGeometricCountPrior # optional
 ```
 #### Number of Total Responses is Low
 
