@@ -54,10 +54,10 @@ class RightGeometricCountPrior:
 	def from_interval(cls, left_endpoint, right_endpoint, concentration = 0.95, maxiter = 100):
 
 		estimated_p = cls._estimate_p_solver(left_endpoint,
-											right_endpoint,
-											concentration,
-											maxiter
-											)
+							right_endpoint,
+							concentration,
+							maxiter
+							)
 
 		return cls(right_endpoint, estimated_p)
 
@@ -88,24 +88,24 @@ class RightGeometricCountPrior:
 		x0 = RightGeometricCountPrior._estimate_p_initial(left_endpoint,right_endpoint,concentration)
 
 		root, result = newton(func = RightGeometricCountPrior._estimate_p, 
-											x0 = x0, 
-											fprime = RightGeometricCountPrior._estimate_p_prime, 
-											args = (left_endpoint, right_endpoint, concentration),
-											maxiter = maxiter, 
-											full_output = True, 
-											disp = False
-											)
+					x0 = x0, 
+					fprime = RightGeometricCountPrior._estimate_p_prime, 
+					args = (left_endpoint, right_endpoint, concentration),
+					maxiter = maxiter, 
+					full_output = True, 
+					disp = False
+					)
 
 		if not result.converged:
 			# fallback to bisection method, which is a way slower root finder, but is guaranteed to work.
 			root, result = bisect(f = RightGeometricCountPrior._estimate_p, 
-													a = 0, 
-													b = 1, 
-													args = (left_endpoint, right_endpoint, concentration),
-													maxiter = maxiter,
-													full_output = True,
-													disp = False
-													)
+						a = 0, 
+						b = 1, 
+						args = (left_endpoint, right_endpoint, concentration),
+						maxiter = maxiter,
+						full_output = True,
+						disp = False
+						)
 			# in case it doesn't work...
 			if not result.converged:
 				raise Exception("Bisection method is the last resort after Newton's method, and the root finder did not converge.")
