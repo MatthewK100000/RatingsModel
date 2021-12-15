@@ -55,15 +55,15 @@ class TernaryPlotMixin:
 		dist_eval = np.asarray(dist_eval)
 
 		fig = ff.create_ternary_contour(
-								coordinates = simplex_mesh,
-								values = dist_eval,
-								pole_labels = list('alpha'+str(arg) for arg in element_pair) + ['alpha_rest'], # referring to the above, it is technically same as ['X', 'Y', 'Z'],
-								interp_mode = 'cartesian',
-								ncontours = self.distribution_contours,
-								showscale = True,
-								title = 'Ternary plot of Dirichlet({},{},{}) distribution'.format(*new_alpha),
-                                **self.extra_plotting_params
-							)
+						coordinates = simplex_mesh,
+						values = dist_eval,
+						pole_labels = list('alpha'+str(arg) for arg in element_pair) + ['alpha_rest'], # referring to the above, it is technically same as ['X', 'Y', 'Z'],
+						interp_mode = 'cartesian',
+						ncontours = self.distribution_contours,
+						showscale = True,
+						title = 'Ternary plot of Dirichlet({},{},{}) distribution'.format(*new_alpha),
+                                		**self.extra_plotting_params
+						)
 
 		return fig
 
