@@ -3,7 +3,6 @@ from count_priors import RightGeometricCountPrior
 
 import multiprocessing
 from functools import partial
-from inspect import signature
 from scipy import stats
 import numpy as np
 
@@ -174,8 +173,8 @@ def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, 
 
 
 	statistics = {
-				'p-value mean': 1 - success_prop,
-				'p-value std': pow(success_prop*(1 - success_prop)/num_samples,0.5)
+			'p-value mean': 1 - success_prop,
+			'p-value std': pow(success_prop*(1 - success_prop)/num_samples,0.5)
 				}
 
 	if details:
@@ -206,21 +205,14 @@ def RatingsModel(additional_methods, count_prior = None):
 	for name, method in additional_methods.items():
 		if name == '__init__' or name == 'monte_carlo_test':
 			print("__init__ should not be passed. Skipping...")
-			continue
-	# 	try:
-	# 		if 'count_prior' in signature(method).parameters:
-	# 		# pass in the count_prior argument and freeze this param in all the methods that need it
-	# 			method = partial(method, count_prior = count_prior)
-	# 	except TypeError: # signature from inspect module is having some issues with classmethod. No problem since it doesn't have argument 'count_prior' anyway.
-	# 		pass
-		
+			continue	
 		methods[name] = method
 
 	
 
 	# __init__ is called based on this implementation below since produced_cls is shared locally.
 	def RatingsModel_init(self, count_prior = count_prior, observed_counts = None, **kwargs):
-		nonlocal produced_cls # apparently don't need this
+		nonlocal produced_cls
 
 		if observed_counts is None or not isinstance(observed_counts,list):
 			raise Exception("Argument 'observed_counts' must be a list of integers.")
@@ -242,8 +234,8 @@ def RatingsModel(additional_methods, count_prior = None):
 		if count_prior == RightGeometricCountPrior:
 			if params.issubset({'left_endpoint', 'right_endpoint', 'concentration', 'maxiter'}): # don't need concentration and maxiter since they have default values
 				RightGeometricCountPrior.__init__(self,
-												  m = kwargs['right_endpoint'], 
-												  p = RightGeometricCountPrior._estimate_p_solver(**kwargs))
+								m = kwargs['right_endpoint'], 
+								p = RightGeometricCountPrior._estimate_p_solver(**kwargs))
 			
 			elif params == {'m','p'}:
 				RightGeometricCountPrior.__init__(self,m = kwargs['m'], p = kwargs['p'])
@@ -267,22 +259,22 @@ def RatingsModel(additional_methods, count_prior = None):
 
 	if count_prior is not None:
 		produced_cls = type('RatingsModel',
-						(DirichletProportionsPrior, count_prior),
-						methods
-						)
+				(DirichletProportionsPrior, count_prior),
+				methods
+				)
 	else:
 		produced_cls = type('RatingsModel',
-							(DirichletProportionsPrior,),
-							methods
-							)
+				(DirichletProportionsPrior,),
+				methods
+				)
 
 	return produced_cls
 
 
 RatingsModel = partial(RatingsModel,
-						additional_methods = {'from_percentages_and_total': from_percentages_and_total,
-											'exact_test': exact_test
-											}
-						)
+			additional_methods = {'from_percentages_and_total': from_percentages_and_total,
+					'exact_test': exact_test
+						}
+			)
 
 # Copyright 2021, Matthew Kulec, All rights reserved.
