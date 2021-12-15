@@ -8,7 +8,7 @@ Suppose you have a user ratings distribution for a product you're looking to buy
 This tool helps infer the answer to that question! At a high level, RatingsModel smoothes the observed counts with a multinomial distribution and calculates the probability that the sampled counts for the (observed) highest voted category are greater than the sampled counts of all the other categories, assuming the event of assigning ratings is repeated indefinitely with the same (or about the same) frequencies. This is the p-value of the test with a null hypothesis that there are no significant differences.
 
 
-## Details on Usage
+## Details on Usage and Implementation
 For situations where the number of responses is low, the observed proportions for each rating will be crude approximations, therefore a Dirichlet prior (which is conjugate to the Multinomial distribution) on the proportions may be imposed to regularize the observed proportions, adding noise for each hypothetical event where ratings are assigned. You do this by using the monte carlo version of the test ``monte_carlo_test``, which uses a monte carlo approximation of the p-value, with ``sample_from_prop_prior = True``. 
 
 For situations where the number of responses is high, the observed proportions will be good approximations, and the Dirichlet prior may be dropped. Either call the method ``monte_carlo_test`` with ``sample_from_prop_prior = False``, or use the ``exact_test``. Mathematically, the exact p-value calculation involves a summation over integer partitions, which is done by utilizing a fast and clever algorithm to calculate these partitions, as well as the ``multiprocessing`` module to distribute the workload over multiple cores. A fast computer with many cores or a good cloud computing instance is recommended for this. If you wish to calculate the exact p-value without a good machine, you may find it easier to estimate it instead, by trading imprecision over speed via ``monte_carlo_test``, setting ``sample_from_prop_prior = False`` and ``sample_from_count_prior = False``. 
@@ -106,6 +106,20 @@ model.render_figure(element_pair = [3,4], output = 'web browser') # renders a fi
 
 
 ### Number of Total Responses is High
+This shampoo looks appealing with its total number of ratings and ratings distribution!
+<p align="middle">
+  <img src="images/product2.png" width="55%" height="70%" />
+  <img src="images/product2ratings.png" width="43%" height="100%" /> 
+</p>
+Once again, is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: what is one minus the probability that people have a 5 star preference over the other stars?
+<br> <br />
+
+Create an instance of the model via an alternative constructor:
+
+```python
+model = RatingsModel().from_percentages_and_total(total = 100, 
+                                        observed_percentages = [0.62, 0.18, 0.11, 0.04, 0.05])
+```
 
 ### RightGeometricCountPrior
 
