@@ -29,8 +29,8 @@ from count_priors import RightGeometricCountPrior # optional
 ```
 #### Number of Total Responses is Low
 <p align="middle">
-  <img src="images/product1.png" width="100" />
-  <img src="images/product1ratings.png" width="100" /> 
+  <img src="images/product1.png" width="100%" height="100%" />
+  <img src="images/product1ratings.png" width="100%" height="100%" /> 
 </p>
 
 #### Number of Total Responses is High
