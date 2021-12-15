@@ -20,17 +20,20 @@ For example, what if there is great incentive for every (or almost every) person
 
 *your count prior class must have a ``count_rvs()`` method with an argument called ``size``, specifying the number of samples to draw. The input is an integer, and output must be a one-dimensional numpy array of random variables. 
 
+## Examples
+
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
-  - Builtins io and functools
-- NumPy (version 1.15.3 or greater)
-- SciPy (version 1.5.4 or greater)
-- Matplotlib (version 3.1.2 or greater)
-- Pillow (version 5.2.0 or greater)
-- Plotly (version 5.3.1 or greater)
+  - Builtins [io](https://docs.python.org/3.6/library/io.html) and [functools](https://docs.python.org/3.7/library/functools.html?highlight=functools#module-functools)
+- [NumPy](https://numpy.org/) (version 1.15.3 or greater)
+- [SciPy](https://scipy.org/) (version 1.5.4 or greater)
+- [Matplotlib](https://matplotlib.org/) (version 3.1.2 or greater)
+- [Pillow](https://python-pillow.org/) (version 5.2.0 or greater)
+- [Plotly](https://plotly.com/) (version 5.3.1 or greater)
 
+## Underlying Mathematics
+TODO
 
-## Examples
 
 ![](images/ternary_contour.png)
