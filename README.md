@@ -21,8 +21,19 @@ For example, what if there is great incentive for every (or almost every) person
 *your count prior class must have a ``count_rvs()`` method with an argument called ``size``, specifying the number of samples to draw. The input is an integer, and output must be a one-dimensional numpy array of random variables. 
 
 ## Examples
+#### Header
+```python
+from Ratings import RatingsModel
+from count_priors import RightGeometricCountPrior
+```
+#### Number of Total Responses is Low
 
-#### Number of total responses low
+#### Number of Total Responses is High
+
+#### RightGeometricCountPrior
+
+#### Custom Count Prior
+
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
