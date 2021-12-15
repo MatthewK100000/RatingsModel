@@ -22,7 +22,7 @@ For example, what if there is great incentive for every (or almost every) person
 
 ## Examples
 
-### Number of total responses low
+#### Number of total responses low
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
