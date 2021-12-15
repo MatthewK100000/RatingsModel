@@ -28,10 +28,20 @@ from Ratings import RatingsModel
 from count_priors import RightGeometricCountPrior # optional
 ```
 #### Number of Total Responses is Low
+Let's say we want to purchase some running gear and see the following user ratings distribution:
 <p align="middle">
-  <img src="images/product1.png" width="55%" height="60%" />
-  <img src="images/product1ratings.png" width="40%" height="80%" /> 
+  <img src="images/product1.png" width="55%" height="70%" />
+  <img src="images/product1ratings.png" width="43%" height="100%" /> 
 </p>
+Is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: what is one minus the probability that people have a 5 star preference over the other stars?  
+
+Create an instance of the model:
+```python
+model = RatingsModel()(observed_counts = [14,5,0,1,1])
+```
+There's only a total of only 21 responses, so we'll allow a Dirichlet prior on the observed proportions [14/21, 5/21, 0/21, 1/21, 1/21]
+
+Notice that asymptotic normal number of samples makes the interval smaller
 
 #### Number of Total Responses is High
 
