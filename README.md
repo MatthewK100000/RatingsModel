@@ -23,7 +23,7 @@ For example, what if there is great incentive for every (or almost every) person
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
-  - io, functools builtins
+  - Builtins io and functools
 - NumPy (version 1.15.3 or greater)
 - SciPy (version 1.5.4 or greater)
 - Matplotlib (version 3.1.2 or greater)
