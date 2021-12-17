@@ -40,6 +40,7 @@ Create an instance of the model:
 
 ```python
 model = RatingsModel()(observed_counts = [14,5,0,1,1])
+
 ```
 There's a total of only 21 responses, so we'll allow a Dirichlet prior on the observed proportions [14/21, 5/21, 0/21, 1/21, 1/21] and run a monte carlo approximation of the p-value, with the default ``num_samples = 1_000``, treating the total response/count as fixed. The default output is a 95% confidence interval (the p-value is asymptotically normal by the Central Limit Theorem):
 
