@@ -3,8 +3,12 @@ from count_priors import RightGeometricCountPrior
 
 import multiprocessing
 from functools import partial
+import warnings
+
 from scipy import stats
 import numpy as np
+
+warnings.simplefilter("always")
 
 
 
@@ -91,7 +95,8 @@ def exact_test(self, parallel_processes = 4, chunksize = 10_000):
 
 	return 1 - prob_of_event
 
-
+class DegenerateIntervalWarning(UserWarning):
+	pass
 
 def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, sample_from_prop_prior = True, num_samples = 1_000, confidence = 0.95, details = False):
 
@@ -181,6 +186,17 @@ def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, 
 		return statistics
 
 	elif confidence is not None:
+		if success_prop == 0:
+			warnings.warn("Out of {} samples, no positive case was encountered, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be less than or equal to {}.".format(num_samples,1/num_samples),
+				DegenerateIntervalWarning)
+			return (0,0)
+		elif success_prop == 1:
+			warnings.warn("Out of {} samples, all cases were positive, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be over {}.".format(num_samples,1 - 1/num_samples),
+				DegenerateIntervalWarning)
+			return (1,1)
+		else:
+			pass
+		
 		if (not isinstance(confidence,float)) or (confidence >= 1) or (confidence <= 0):
 			raise Exception("Argument 'confidence' must be a float between 0 and 1 (exclusive).")
 
