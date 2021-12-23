@@ -5,13 +5,14 @@ A Bayesian hypothesis testing tool which determines the significance of user rat
 ## Background
 Suppose you have a user ratings distribution for a product you're looking to buy, or maybe the responses from a survey you've conducted. Given the counts for each category, how does one assess the significance of the differences between these counts? 
 
-This tool helps infer the answer to that question! At a high level, RatingsModel smoothes the observed counts with a multinomial distribution and calculates the probability that the sampled counts for the (observed) highest voted category are greater than the sampled counts of all the other categories, assuming the event of assigning ratings is repeated "in alternate, independent universes" with the same (or about the same) frequencies. One minus this probability is the p-value of the test with a null hypothesis that there are no significant differences.
+This tool helps infer the answer to that question! At a high level, RatingsModel smoothes the observed counts with a multinomial distribution and calculates the probability that the sampled counts for the (observed) highest voted category are greater than the sampled counts of all the other categories, assuming the event of assigning ratings is repeated "in alternate, independent universes" with the same (or about the same) frequencies*. One minus this probability is the p-value of the test with a null hypothesis that there are no significant differences.
 
+*that is, ratings given on an individual level are "drawn out of a box" with those frequencies.
 
 ## Details on Usage and Implementation
 For situations where the number of responses is low, the observed proportions for each rating will be crude approximations, therefore a Dirichlet prior (which is conjugate to the Multinomial distribution) on the proportions may be imposed to regularize the observed proportions, adding noise to the proportions for each hypothetical event where ratings are assigned. You do this by using the monte carlo version of the test ``monte_carlo_test``, which uses a monte carlo approximation of the p-value, with ``sample_from_prop_prior = True``. 
 
-For situations where the number of responses is high, the observed proportions will be good approximations, and the Dirichlet prior may be dropped. Either call the method ``monte_carlo_test`` with ``sample_from_prop_prior = False``, or use the ``exact_test``. Mathematically, the exact p-value calculation involves a summation over integer partitions, which is done by utilizing a fast and clever algorithm to calculate these partitions, as well as the ``multiprocessing`` module to distribute the workload over multiple cores. A fast computer with many cores or a good cloud computing instance is recommended for this. Without a good machine, you may find it easier to estimate the p-value instead, by trading imprecision over speed via ``monte_carlo_test``, setting ``sample_from_prop_prior = False`` and ``sample_from_count_prior = False``. 
+For situations where the number of responses is high, the observed proportions will be good approximations, and the Dirichlet prior may be dropped. Either call the method ``monte_carlo_test`` with ``sample_from_prop_prior = False``, or use the ``exact_test``. Mathematically, the exact p-value calculation involves a summation over integer partitions, which is done by utilizing two fast and memory efficient algorithms to calculate these partitions, as well as the ``multiprocessing`` module to distribute the workload over multiple cores. A fast computer with many cores or a good cloud computing instance is recommended for this. Without a good machine, you may find it easier to estimate the p-value instead, by trading imprecision over speed via ``monte_carlo_test``, setting ``sample_from_prop_prior = False`` and ``sample_from_count_prior = False``. 
 
 You may also wish to impose a count prior on the total number of responses, to sample from it for each hypothetical event where ratings are assigned. You would want to do this if you think the turnout is expected to fluctuate according to some distribution, queue or process, time dependent or not, and you wish to include this information in your inference. 
 
@@ -34,7 +35,7 @@ Let's say we want to purchase some running gear and see the following user ratin
   <img src="images/product1.png" width="55%" height="70%" />
   <img src="images/product1ratings.png" width="43%" height="100%" /> 
 </p>
-Is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: what is one minus the probability that people have a 5 star preference over the other stars?  
+Is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: how small is one minus the probability that people have a 5 star preference over the other stars?  
 <br> <br />
 Create an instance of the model:
 
@@ -112,7 +113,7 @@ This shampoo looks promising with its total number of ratings and ratings distri
   <img src="images/product2.png" width="55%" height="70%" />
   <img src="images/product2ratings.png" width="30%" height="10%" /> 
 </p>
-Once again, is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: what is one minus the probability that people have a 5 star preference over the other stars?
+Once again, is there a strong, statistically significant, public consensus at 5 stars? This is the same as asking: how small is one minus the probability that people have a 5 star preference over the other stars?
 <br> <br />
 
 Create an instance of the model via an alternative constructor:
@@ -129,6 +130,10 @@ We'll drop the Dirichlet prior since almost all of the mass will concentrate aro
 print(model.exact_test(parallel_processes = 4, chunksize = 200)) # outputs 6.942235009077535e-08
 ```
 The ``parallel_processes`` specifies the number of process to spawn. I set this to 4 since I only have 4 cores on my machine. The ``chunksize`` parameter dictates the number of unique partitions (up to reordering) to allocate to each core. Each core will basically still go through each unique permutation of each partition however. 
+
+Judging from how small the result is, it looks like there is enough statistical evidence to conclude that there are signficant differences between the counts for each rating category. It is expected that as we increase the ``total``, the evidence will be even stronger. We can get a sense of what the true p-value would have been, have we had more computing power, via an approximation:
+
+
 
 
 ### RightGeometricCountPrior
