@@ -138,7 +138,7 @@ The ``parallel_processes`` specifies the number of process to spawn. I set this 
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
-  - Builtins [io](https://docs.python.org/3.6/library/io.html) and [functools](https://docs.python.org/3.7/library/functools.html?highlight=functools#module-functools)
+  - Builtins [io](https://docs.python.org/3.6/library/io.html), [warnings](https://docs.python.org/3.6/library/warnings.html), and [functools](https://docs.python.org/3.7/library/functools.html?highlight=functools#module-functools)
 - [NumPy](https://numpy.org/) (version 1.15.3 or greater)
 - [SciPy](https://scipy.org/) (version 1.5.4 or greater)
 - [Matplotlib](https://matplotlib.org/) (version 3.1.2 or greater)
