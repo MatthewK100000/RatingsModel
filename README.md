@@ -222,6 +222,7 @@ print(total_responses_prior.p) # outputs
 t = np.arange(165,201)
 plt.title("actual pmf")
 plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
+plt.show()
 ```
 
 
