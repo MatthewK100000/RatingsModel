@@ -261,8 +261,12 @@ print(model.monte_carlo_test(sample_from_prop_prior = True,
 
 ```
 
+Looks like there isn't enough evidence to conclude that people favor the category with 47% of responses over the other categories. 
+
 <br> <br />
 ### Custom Count Prior
+
+As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to gauge the final result. You collect voting preferences of 10,000 individuals. 5100 individuals support candidate A, while 4900 individuals support candidate B. In the whole state, there are 8.6 million people and it is projected that 2.3 million will vote (this could be derived from some regression model for instance). Assuming an individualschances of voting for either candidate are independent of whether or not t
 
 
 
