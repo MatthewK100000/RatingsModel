@@ -162,7 +162,7 @@ To summarize, people are overwhelmingly satisfied with this product, statistical
 <br> <br />
 ### RightGeometricCountPrior
 
-#### Displaying the ``RightGeometricCountPrior`` turnout distribution
+#### Displaying the ``RightGeometricCountPrior`` Turnout Distribution
 Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution (on the total responses) coded as a class. The package is complete with one such count prior, ``RightGeometricCountPrior``, which generally looks like this:
 <p align="middle">
   <img src="images/RightGeometricCountPrior_depiction.png" width="40%" height="40%" />
