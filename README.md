@@ -143,7 +143,8 @@ print(model.monte_carlo_test(sample_from_prop_prior = False, sample_from_count_p
 
 You'll most likely end up seeing a ``DegenerateIntervalWarning`` raised. The warning comes with the following message:
 ```
-Out of 1000000 samples, all cases were positive, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be less than or equal to 1e-06.
+Out of 1000000 samples, all cases were positive, so the estimated sampling variability is zero. 
+Margin of error dictates that the actual p-value may be less than or equal to 1e-06.
 
 (0, 0)
 ```
