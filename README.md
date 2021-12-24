@@ -207,7 +207,7 @@ print(total_responses_prior.count_rvs(size = 5)) # outputs a 1-dim numpy array: 
 
 ```
 <br> <br />
-#### Estimating Distribution Parameters from a Confidence Interval
+#### Estimating ``RightGeometricCountPrior`` Parameters from a Confidence Interval
 It may be easier to estimate the parameters of ``RightGeometricCountPrior`` using a range and degree of certainty as to what a future turnout might look like, rather than setting it ourselves. Let's say we sent out a survey to 200 people, and we are 95% sure that the turnout will be somewhere between 180 and 200, but concentrated towards 200. Here's how you would create an instance of ``RightGeometricCountPrior``:
 
 ```python
@@ -221,7 +221,7 @@ total_responses_prior = RightGeometricCountPrior.from_interval(left_endpoint = 1
 print(total_responses_prior.m) # outputs 200
 print(total_responses_prior.p) # outputs 0.8670540889737532 as the new decay probability.
 
-# displaying zoomed-in version of the pmf with the above parameters
+# displays zoomed-in version of the pmf with the above parameters
 t = np.arange(165,201)
 plt.title("actual pmf")
 plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
@@ -233,7 +233,22 @@ plt.show()
 
 <br> <br />
 #### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
-fhrhfbrhbf
+Moving along the previous section, what if out of 200 paid surveys sent out, we recieved 188 responses and a ratings distribution of [0.40,0.35,0.20,0.05]. We believe that the turnout could have been anywhere between 180 and 200, with 95% certainty, and wish to see the effect of jittering the 188 observed total:
+
+```python
+
+model = RatingsModel(RightGeometricCountPrior).\
+                from_percentages_and_total(total = 188,
+                                            observed_percentages = [0.40,0.35,0.20,0.05],
+                                            left_endpoint = 180, 
+                                            right_endpoint = 200, 
+                                            concentration = 0.95
+                                           )
+
+print(model.monte_carlo_test(sample_from_prop_prior = True, sample_from_count_prior = True, num_samples = 1_000))                                                 
+
+```
+
 <br> <br />
 ### Custom Count Prior
 
