@@ -165,6 +165,7 @@ Perhaps one of the best features about ``RatingsModel`` is that it could dynamic
 <p align="middle">
   <img src="images/RightGeometricCountPrior_depiction.png" width="40%" height="40%" />
 </p>
+
 ```python
 # code to generate the above plot...
 from count_priors import RightGeometricCountPrior
