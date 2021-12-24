@@ -160,7 +160,6 @@ Since the ``monte_carlo_test`` method tried to construct a confidence interval a
 To summarize, people are overwhelmingly satisfied with this product, statistically speaking.
 
 <br> <br />
-
 ### RightGeometricCountPrior
 Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution coded as a class.
 
