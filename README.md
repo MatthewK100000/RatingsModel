@@ -219,7 +219,7 @@ total_responses_prior = RightGeometricCountPrior.from_interval(left_endpoint = 1
 print(total_responses_prior.m) # outputs 
 print(total_responses_prior.p) # outputs 
 
-t = np.arange(0,201)
+t = np.arange(165,201)
 plt.title("actual pmf")
 plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
 ```
