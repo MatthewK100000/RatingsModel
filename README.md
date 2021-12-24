@@ -237,7 +237,7 @@ Moving along the previous section, what if out of 200 paid surveys sent out, we 
 
 ```python
 
-model = RatingsModel(RightGeometricCountPrior).\
+model = RatingsModel(count_prior = RightGeometricCountPrior).\
                 from_percentages_and_total(total = 188,
                                             observed_percentages = [0.40,0.35,0.20,0.05],
                                             left_endpoint = 180, 
