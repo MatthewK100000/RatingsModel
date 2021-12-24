@@ -187,13 +187,13 @@ def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, 
 
 	elif confidence is not None:
 		if success_prop == 0:
-			warnings.warn("Out of {} samples, no positive case was encountered, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be less than or equal to {}.".format(num_samples,1/num_samples),
-				DegenerateIntervalWarning)
-			return (0,0)
-		elif success_prop == 1:
-			warnings.warn("Out of {} samples, all cases were positive, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be over {}.".format(num_samples,1 - 1/num_samples),
+			warnings.warn("Out of {} samples, no positive case was encountered, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be over {}.".format(num_samples,1 - 1/num_samples),
 				DegenerateIntervalWarning)
 			return (1,1)
+		elif success_prop == 1:
+			warnings.warn("Out of {} samples, all cases were positive, so the estimated sampling variability is zero. Margin of error dictates that the actual p-value may be less than or equal to {}.".format(num_samples,1/num_samples),
+				DegenerateIntervalWarning)
+			return (0,0)
 		else:
 			pass
 		
