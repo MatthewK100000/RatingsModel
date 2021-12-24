@@ -161,7 +161,10 @@ To summarize, people are overwhelmingly satisfied with this product, statistical
 
 <br> <br />
 ### RightGeometricCountPrior
-Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution coded as a class.
+Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution (on the total responses) coded as a class. The package is complete with one such count prior, ``RightGeometricCountPrior``, which generally looks like this:
+
+
+
 
 ### Custom Count Prior
 
