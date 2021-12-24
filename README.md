@@ -163,9 +163,27 @@ To summarize, people are overwhelmingly satisfied with this product, statistical
 ### RightGeometricCountPrior
 Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution (on the total responses) coded as a class. The package is complete with one such count prior, ``RightGeometricCountPrior``, which generally looks like this:
 <p align="middle">
-  <img src="images/RightGeometricCountPrior_depiction.png" width="50%" height="50%" />
+  <img src="images/RightGeometricCountPrior_depiction.png" width="40%" height="40%" />
 </p>
+```python
+# code to generate the above plot...
+from count_priors import RightGeometricCountPrior
+import matplotlib.pyplot as plt
+import numpy as np
 
+total_responses_prior = RightGeometricCountPrior(10,0.8)
+
+t = np.arange(0,11)
+plt.subplot(1,2,1)
+plt.title("actual pmf")
+plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
+
+plt.subplot(1,2,2)
+plt.title("histogram from 10k samples")
+plt.hist(total_responses_prior.rvs(size=10000), bins = np.arange(0,12), rwidth=0.8, density=True)
+
+plt.show()
+```
 
 
 ### Custom Count Prior
