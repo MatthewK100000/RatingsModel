@@ -233,13 +233,13 @@ plt.show()
 
 <br> <br />
 #### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
-Moving along the previous section, what if out of 200 paid surveys sent out, we recieved 188 responses and a ratings distribution of [0.55,0.35,0.08,0.02]. We believe that the turnout could have been anywhere between 180 and 200, with 95% certainty, and wish to see the effect of jittering the 188 observed total:
+Moving along the previous section, what if out of 200 paid surveys sent out, we recieved 188 responses and a ratings distribution of [0.47,0.35,0.15,0.03]. We believe that the turnout could have been anywhere between 180 and 200, with 95% certainty, and wish to see the effect of jittering the 188 observed total:
 
 ```python
 
 model = RatingsModel(RightGeometricCountPrior).\
                 from_percentages_and_total(total = 188,
-                                            observed_percentages = [0.55,0.35,0.08,0.02],
+                                            observed_percentages = [0.47,0.35,0.15,0.03],
                                             left_endpoint = 180, 
                                             right_endpoint = 200, 
                                             concentration = 0.95
