@@ -158,6 +158,7 @@ Margin of error dictates that the actual p-value may be less than or equal to 1e
 Since the ``monte_carlo_test`` method tried to construct a confidence interval about something that had no estimated variance, which happens when all the monte-carlo samples are the same, it yields a degenerate confidence interval. This interval has no mass under it even though the ``confidence`` argument is constrained to be nonzero. This is okay, since there is a high degree of certainty that the actual p-value is less than 1e-6.
 
 To summarize, people are overwhelmingly satisfied with this product, statistically speaking.
+
 <br> <br />
 
 ### RightGeometricCountPrior
