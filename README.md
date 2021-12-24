@@ -193,6 +193,7 @@ plt.show()
 </p>
 </details>
 <br> <br />
+
 #### Generating Random Turnout Realizations
 You can sample from this pmf by calling the ``count_rvs`` or ``rvs`` method if you're working with an instance thereof. If you're working with and instance of ``RatingsModel``, call ``count_rvs`` instead:
 
