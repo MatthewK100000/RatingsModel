@@ -215,7 +215,7 @@ def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, 
 
 
 
-def RatingsModel(additional_methods, count_prior = None):
+def RatingsModel(count_prior = None, additional_methods = None):
 	methods = {}
 
 	for name, method in additional_methods.items():
