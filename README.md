@@ -200,14 +200,31 @@ You can sample from this pmf by calling the ``count_rvs`` or ``rvs`` method if y
 ```python
 from count_priors import RightGeometricCountPrior
 
-total_responses_prior = RightGeometricCountPrior(200,0.8)
+# the chance of sampling 199 is 80% of the chance of sampling 200. The chance of sampling 198 is 64% = (80%)^2 of the chance of sampling 200...
+total_responses_prior = RightGeometricCountPrior(200,0.8) 
 
 print(total_responses_prior.count_rvs(size = 5)) # outputs a 1-dim numpy array: [200. 199. 188. 191. 194.]
 
 ```
 <br> <br />
 #### Estimating Distribution Parameters from a Confidence Interval
-fhrhfbrhbf
+It may be easier to estimate the parameters of ``RightGeometricCountPrior`` using a range and degree of certainty as to what a future turnout might look like, rather than setting it ourselves. Let's say we sent out a survey to 200 people, and we are 95% sure that the turnout will be somewhere between 180 and 200, but concentrated towards 200. Here's how you would create an instance of ``RightGeometricCountPrior``:
+
+```python
+total_responses_prior = RightGeometricCountPrior.from_interval(left_endpoint = 180, 
+                                                                right_endpoint = 200, 
+                                                                concentration = 0.95, 
+                                                                maxiter = 100) # 100 iterations of Newton's method in the backend
+
+print(total_responses_prior.m) # outputs 
+print(total_responses_prior.p) # outputs 
+
+t = np.arange(0,11)
+plt.title("actual pmf")
+plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
+```
+
+
 <br> <br />
 #### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
 fhrhfbrhbf
