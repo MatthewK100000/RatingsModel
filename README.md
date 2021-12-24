@@ -214,7 +214,8 @@ It may be easier to estimate the parameters of ``RightGeometricCountPrior`` usin
 total_responses_prior = RightGeometricCountPrior.from_interval(left_endpoint = 180, 
                                                                 right_endpoint = 200, 
                                                                 concentration = 0.95, 
-                                                                maxiter = 100) # 100 iterations of Newton's method in the backend
+                                                                maxiter = 100)
+                                                                # 100 iterations of Newton's method in the backend
 
 # estimated parameters
 print(total_responses_prior.m) # outputs 200
