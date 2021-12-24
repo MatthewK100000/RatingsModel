@@ -244,8 +244,7 @@ model = RatingsModel(RightGeometricCountPrior).\
                                             right_endpoint = 200, 
                                             concentration = 0.95
                                            )
-np.random.seed(42) # seed the generator
-
+                                           
 print(model.monte_carlo_test(sample_from_prop_prior = True, 
                               sample_from_count_prior = True, 
                               num_samples = 10_000, 
@@ -258,7 +257,7 @@ print(model.monte_carlo_test(sample_from_prop_prior = True,
                               confidence = 0.99,
                               details = True)['p-value mean']) 
                               
-# ... 
+# ... 0.09730000000000005
 
 ```
 
