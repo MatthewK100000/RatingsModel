@@ -161,6 +161,8 @@ To summarize, people are overwhelmingly satisfied with this product, statistical
 
 <br> <br />
 ### RightGeometricCountPrior
+
+#### Displaying the ``RightGeometricCountPrior`` turnout distribution
 Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution (on the total responses) coded as a class. The package is complete with one such count prior, ``RightGeometricCountPrior``, which generally looks like this:
 <p align="middle">
   <img src="images/RightGeometricCountPrior_depiction.png" width="40%" height="40%" />
@@ -192,10 +194,22 @@ plt.show()
 </p>
 </details>
 
-#### Generating Turnout Realizations
-fhrhfbrhbf
+#### Generating Random Turnout Realizations
+You can sample from this pmf by calling the ``count_rvs`` or ``rvs`` method if you're working with an instance thereof. If you're working with and instance of ``RatingsModel``, call ``count_rvs`` instead:
+
+```python
+from count_priors import RightGeometricCountPrior
+
+total_responses_prior = RightGeometricCountPrior(200,0.8)
+
+print(total_responses_prior.count_rvs(size = 5)) # outputs [200. 199. 188. 191. 194.]
+
+```
 
 #### Estimating Distribution Parameters from a Confidence Interval
+fhrhfbrhbf
+
+#### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
 fhrhfbrhbf
 
 ### Custom Count Prior
