@@ -202,7 +202,7 @@ from count_priors import RightGeometricCountPrior
 
 total_responses_prior = RightGeometricCountPrior(200,0.8)
 
-print(total_responses_prior.count_rvs(size = 5)) # outputs [200. 199. 188. 191. 194.]
+print(total_responses_prior.count_rvs(size = 5)) # outputs a 1-dim numpy array: [200. 199. 188. 191. 194.]
 
 ```
 
