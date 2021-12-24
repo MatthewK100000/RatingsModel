@@ -132,7 +132,15 @@ print(model.exact_test(parallel_processes = 4, chunksize = 200)) # outputs 6.942
 ```
 The ``parallel_processes`` specifies the number of process to spawn. I set this to 4 since I only have 4 cores on my machine. The ``chunksize`` parameter dictates the number of unique partitions (up to reordering) to allocate to each core. Each core will basically still go through each unique permutation of each partition however. 
 
-Judging from how small the result is, it looks like there is enough statistical evidence to conclude that there are signficant differences between the counts for each rating category. It is expected that as we increase the ``total``, the evidence will be even stronger. We can get a sense of what the true p-value would have been, have we had more computing power, via an approximation:
+Judging from how small the exact p-value is, it looks like there is enough statistical evidence to conclude that there are significant differences between the highest voted rating and all the other ratings. It is expected that as we increase the ``total``, the evidence will be even stronger. We can get a sense of what the true p-value would have been, have we had more computing power, via an approximation:
+
+```python
+model = RatingsModel().from_percentages_and_total(total = 32_852, 
+                            observed_percentages = [0.62, 0.18, 0.11, 0.04, 0.05]) # new instance of the model, using the actual num of responses
+                            
+print(model.monte_carlo_test(sample_from_prop_prior = False, sample_from_count_prior = False, num_samples = 1_000_000))
+
+```
 
 
 
