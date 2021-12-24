@@ -245,7 +245,19 @@ model = RatingsModel(RightGeometricCountPrior).\
                                             concentration = 0.95
                                            )
 
-print(model.monte_carlo_test(sample_from_prop_prior = True, sample_from_count_prior = True, num_samples = 10_000, confidence = 0.99))                                                 
+print(model.monte_carlo_test(sample_from_prop_prior = True, 
+                              sample_from_count_prior = True, 
+                              num_samples = 10_000, 
+                              confidence = 0.99)) # outputs (0.0930451126276216, 0.1085548873723784)
+
+# the mean is about...
+print(model.monte_carlo_test(sample_from_prop_prior = True, 
+                              sample_from_count_prior = True, 
+                              num_samples = 10_000, 
+                              confidence = 0.99,
+                              details = True)['p-value mean']) 
+                              
+# ... 
 
 ```
 
