@@ -219,15 +219,17 @@ total_responses_prior = RightGeometricCountPrior.from_interval(left_endpoint = 1
 
 # estimated parameters
 print(total_responses_prior.m) # outputs 200
-print(total_responses_prior.p) # outputs 0.8670540889737532
+print(total_responses_prior.p) # outputs 0.8670540889737532 as the new decay probability.
 
-# displaying part of the pmf with the above parameters
+# displaying zoomed-in version of the pmf with the above parameters
 t = np.arange(165,201)
 plt.title("actual pmf")
 plt.bar(t, total_responses_prior.pmf(t), align = 'edge')
 plt.show()
 ```
-
+<p align="middle">
+  <img src="images/RightGeometricCountPrior_depiction2.png" width="40%" height="40%" />
+</p>
 
 <br> <br />
 #### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
