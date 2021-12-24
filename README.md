@@ -161,9 +161,10 @@ To summarize, people are overwhelmingly satisfied with this product, statistical
 
 
 ### RightGeometricCountPrior
-
+Perhaps one of the best features about ``RatingsModel`` is that it could dynamically inherit from any count prior distribution coded as a class.
 
 ### Custom Count Prior
+
 
 
 ## Recommended Dependencies
