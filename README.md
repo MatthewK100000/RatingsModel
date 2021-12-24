@@ -193,7 +193,7 @@ plt.show()
 
 </p>
 </details>
-
+<br> <br />
 #### Generating Random Turnout Realizations
 You can sample from this pmf by calling the ``count_rvs`` or ``rvs`` method if you're working with an instance thereof. If you're working with and instance of ``RatingsModel``, call ``count_rvs`` instead:
 
@@ -205,13 +205,13 @@ total_responses_prior = RightGeometricCountPrior(200,0.8)
 print(total_responses_prior.count_rvs(size = 5)) # outputs a 1-dim numpy array: [200. 199. 188. 191. 194.]
 
 ```
-
+<br> <br />
 #### Estimating Distribution Parameters from a Confidence Interval
 fhrhfbrhbf
-
+<br> <br />
 #### Integrating ``RightGeometricCountPrior`` into the ``RatingsModel``
 fhrhfbrhbf
-
+<br> <br />
 ### Custom Count Prior
 
 
