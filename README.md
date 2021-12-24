@@ -245,7 +245,7 @@ model = RatingsModel(RightGeometricCountPrior).\
                                             concentration = 0.95
                                            )
 
-print(model.monte_carlo_test(sample_from_prop_prior = True, sample_from_count_prior = True, num_samples = 1_000))                                                 
+print(model.monte_carlo_test(sample_from_prop_prior = True, sample_from_count_prior = True, num_samples = 10_000, confidence = 0.99))                                                 
 
 ```
 
