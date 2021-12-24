@@ -126,12 +126,17 @@ model = RatingsModel().from_percentages_and_total(total = 100,
 
 # replaced 32_852 with 100 since my macbook air can't handle the task in reasonable time
 ```
+
+#### Distributing computation over multiple cores with the ``exact_test``
+
 We'll drop the Dirichlet prior since almost all of the mass will concentrate around the mode, and it won't make much of a difference if we treat the observed proportions fixed. We'll also fix the total counts distribution parameter. We can then run the ``exact_test``:
 
 ```python
 print(model.exact_test(parallel_processes = 4, chunksize = 200)) # outputs 6.942235009077535e-08
 ```
 The ``parallel_processes`` specifies the number of process to spawn. I set this to 4 since I only have 4 cores on my machine. The ``chunksize`` parameter dictates the number of unique partitions (up to reordering) to allocate to each core. Each core will basically still go through each unique permutation of each partition however. 
+
+#### P-values on the extremes
 
 Judging from how small the above exact p-value is, it looks like there is enough statistical evidence to conclude that there are significant differences between the highest voted rating and all the other ratings. It is expected that as we increase the ``total``, the evidence will be even stronger. We can get a sense of what the true p-value would have been, have we had more computing power, via an approximation:
 
