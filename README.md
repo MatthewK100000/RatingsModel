@@ -244,6 +244,7 @@ model = RatingsModel(RightGeometricCountPrior).\
                                             right_endpoint = 200, 
                                             concentration = 0.95
                                            )
+np.random.seed(42) # seed the generator
 
 print(model.monte_carlo_test(sample_from_prop_prior = True, 
                               sample_from_count_prior = True, 
