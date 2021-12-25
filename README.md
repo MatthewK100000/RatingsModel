@@ -285,20 +285,27 @@ class WillVoteFromSampleCountPrior:
     self.N = N
     self.K = K
     self.n = n
+    self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
   
   
   def count_rvs(self, size = 1): # must have this method!
     assert isinstance(size, int) # optional debugging check
-    dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
-    return dist.rvs(size = size)
+    return self.dist.rvs(size = size)
   
-  def pmf(self,
+  def pmf(self,k): # optional method...
+    return self.dist.pmf(k = k)
     
 
-# notice that the instantiation parameters for the count prior are passed inside the second parenthesis!
-model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4050, 3950], N = 4_400_000, K = 2_300_000, n = 8_000)
+# notice that the instantiation parameters for the count prior (on the total responses that matter) are passed inside the second parenthesis!
+model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4050, 3950], 
+                                                    N = 4_400_000, 
+                                                    K = 2_300_000, 
+                                                    n = 8_000)
 
-print(model.monte_carlo_test(sample_from_prop_prior = False, sample_from_count_prior = True, num_samples = 10_000, confidence = 0.99))
+print(model.monte_carlo_test(sample_from_prop_prior = False, 
+                              sample_from_count_prior = True, 
+                              num_samples = 10_000, 
+                              confidence = 0.99))
 
 ```
 
