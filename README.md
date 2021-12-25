@@ -266,13 +266,23 @@ Looks like there isn't enough evidence to conclude that people favor the categor
 <br> <br />
 ### Custom Count Prior
 
-As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals. 5050 individuals support candidate A, while 4950 individuals support candidate B. 
+As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals. 4050 individuals support candidate A, 3950 individuals support candidate B, and 2000 are still unsure. 
 
-In the whole state, there are 4.6 million people eligible to vote. (not necessarily registered, but satisfies certain standards: for example, citizenry and at least X years of age). 
+In the whole state, there are 4.4 million people eligible to vote. Note that this does not necessarily mean registered; they just satisfy certain jurisdictional standards (for example, citizenry and at least X years of age). You screen your participants based on if they met these standards (to remove the ambiguity of asking children for instance).
 
-t is projected that 2.3 million will vote (this could be derived from some regression model for instance). Assuming an individual's chances of voting for either candidate are independent of whether or not they will vote (that is, the chances remain unaffected), and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide). 
+It is projected that 2.3 million will vote, and you obtain this from some regression model. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^4]. One can then filter out individuals from the list of 4050 + 3950 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4050 and 3950?
+
+```python
+
+class WillVoteFromSampleCountPrior:
+  def __init__(self, 
+
+```
+
 
 note that the instantiation arguments will be passed as so: **kwargs
+
+[^4]: In real life, polling is a tricky business. Anything could happen leading up to election day that could sway the opinions of voters. While the latter assumption can be met through careful data collection, fulfilling the former two assumptions is tenuous. 
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
