@@ -296,7 +296,9 @@ class WillVoteFromSampleCountPrior:
     return self.dist.pmf(k = k)
     
 
-# notice that the instantiation parameters for the count prior (on the total responses that matter) are passed inside the second parenthesis!
+# notice that the instantiation parameters for the count prior 
+# (on the total responses that matter) are passed inside the second parenthesis!
+
 model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4050, 3950], 
                                                     N = 4_400_000, 
                                                     K = 2_300_000, 
