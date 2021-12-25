@@ -266,9 +266,13 @@ Looks like there isn't enough evidence to conclude that people favor the categor
 <br> <br />
 ### Custom Count Prior
 
-As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to gauge who the winner could be. You collect voting preferences of 10,000 individuals. 5100 individuals support candidate A, while 4900 individuals support candidate B. In the whole state, there are 4.6 million people eligible to vote (not necessarily registered, but and it is projected that 2.3 million will vote (this could be derived from some regression model for instance). Assuming an individual's chances of voting for either candidate are independent of whether or not they will vote (that is, the chances remain unaffected), and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide). 
+As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals. 5050 individuals support candidate A, while 4950 individuals support candidate B. 
 
+In the whole state, there are 4.6 million people eligible to vote. (not necessarily registered, but satisfies certain standards: for example, citizenry and at least X years of age). 
 
+t is projected that 2.3 million will vote (this could be derived from some regression model for instance). Assuming an individual's chances of voting for either candidate are independent of whether or not they will vote (that is, the chances remain unaffected), and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide). 
+
+note that the instantiation arguments will be passed as so: **kwargs
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
