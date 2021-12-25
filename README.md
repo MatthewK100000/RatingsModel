@@ -266,21 +266,43 @@ Looks like there isn't enough evidence to conclude that people favor the categor
 <br> <br />
 ### Custom Count Prior
 
-As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals. 4050 individuals support candidate A, 3950 individuals support candidate B, and 2000 are still unsure. 
+As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals without replacement. 4050 individuals support candidate A, 3950 individuals support candidate B, and 2000 are still unsure. 
 
 In the whole state, there are 4.4 million people eligible to vote. Note that this does not necessarily mean registered; they just satisfy certain jurisdictional standards (for example, citizenry and at least X years of age). You screen your participants based on if they met these standards (to remove the ambiguity of asking children for instance).
 
 It is projected that 2.3 million will vote, and you obtain this from some regression model. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^4]. One can then filter out individuals from the list of 4050 + 3950 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4050 and 3950?
 
 ```python
+from scipy import stats
+
 
 class WillVoteFromSampleCountPrior:
-  def __init__(self, 
+  def __init__(self, N, K, n):
+    assert isinstance(N,int) # optional debugging checks
+    assert isinstance(K,int)
+    assert isinstance(n,int)
+    
+    self.N = N
+    self.K = K
+    self.n = n
+  
+  
+  def count_rvs(self, size = 1): # must have this method!
+    assert isinstance(size, int) # optional debugging check
+    dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
+    return dist.rvs(size = size)
+  
+  def pmf(self,
+    
+
+# notice that the instantiation parameters for the count prior are passed inside the second parenthesis!
+model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4050, 3950], N = 4_400_000, K = 2_300_000, n = 8_000)
+
+print(model.monte_carlo_test(sample_from_prop_prior = False, sample_from_count_prior = True, num_samples = 10_000, confidence = 0.99))
 
 ```
 
 
-note that the instantiation arguments will be passed as so: **kwargs
 
 [^4]: In real life, polling is a tricky business. Anything could happen leading up to election day that could sway the opinions of voters. While the latter assumption can be met through careful data collection, fulfilling the former two assumptions is tenuous. 
 
