@@ -316,7 +316,7 @@ print(model.monte_carlo_test(sample_from_prop_prior = False,
 The above outputs (0.07358808165222028, 0.08761191834777973), so the true p-value is somewhere in this interval. The conclusion is that differences are insignificant, but teeter on significance. 
 
 
-[^4]: If the errors in the regression model are assumed to be normally distributed, then try adding gaussian noise (converting to integers) to the 2.3 million estimate, and extending the hypergeometric count prior!
+[^4]: If the errors in the regression model are assumed to be normally distributed, then try adding gaussian noise (converting to integers) to the 2.3 million estimate, and extending the hypergeometric count prior by adding a hyperprior on the parameter N.
 
 [^5]: In real life, polling is a tricky business. Anything could happen leading up to election day that could sway the opinions of voters. While the latter assumption can be met through careful data collection, fulfilling the former two assumptions is tenuous. 
 
