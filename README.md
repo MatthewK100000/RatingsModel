@@ -266,11 +266,11 @@ Looks like there isn't enough evidence to conclude that people favor the categor
 <br> <br />
 ### Custom Count Prior
 
-As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals without replacement. 4160 individuals support candidate A, 3840 individuals support candidate B, and 2000 are still unsure. 
+As a final example, consider a situation where you wish to utilize your own count prior (on the total number of responses). Maybe there is an upcoming state election, and you wish to forecast the winner. You collect voting preferences of 10,000 individuals without replacement. 4090 individuals support candidate A, 3910 individuals support candidate B, and 2000 are still unsure. 
 
 In the whole state, there are 4.4 million people eligible to vote. Note that this does not necessarily mean registered; they just satisfy certain jurisdictional standards (for example, citizenry and at least X years of age). You screen your participants based on if they met these standards (to remove the ambiguity of asking children for instance).
 
-It is projected that 2.3 million will vote, and you obtain this from some regression model. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^4]. One can then filter out individuals from the list of 4160 + 3840 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4160 and 3840?
+It is projected that 2.3 million will vote, and you obtain this from some regression model. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^4]. One can then filter out individuals from the list of 4090 + 3910 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4090 and 3910?
 
 ```python
 from scipy import stats
@@ -302,7 +302,7 @@ class WillVoteFromSampleCountPrior:
 # notice that the instantiation parameters for the count prior (on the total responses that matter) 
 # are passed inside the second parenthesis!
 
-model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4160, 3840], 
+model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4090, 3910], 
                                                     N = 4_400_000,
                                                     K = 2_300_000,
                                                     n = 8_000)
@@ -311,7 +311,7 @@ print(model.monte_carlo_test(sample_from_prop_prior = False,
                               sample_from_count_prior = True, 
                               num_samples = 10_000, 
                               confidence = 0.99))
-
+# outputs (0.07358808165222028, 0.08761191834777973)
 ```
 
 
