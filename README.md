@@ -274,7 +274,7 @@ It is projected that 2.3 million will vote, and you obtain this from some regres
 
 ```python
 from scipy import stats
-
+from Ratings import RatingsModel
 
 class WillVoteFromSampleCountPrior:
     def __init__(self, N, K, n):
@@ -296,12 +296,12 @@ class WillVoteFromSampleCountPrior:
         return self.dist.pmf(k = k)
     
 
-# notice that the instantiation parameters for the count prior 
-# (on the total responses that matter) are passed inside the second parenthesis!
+# notice that the instantiation parameters for the count prior (on the total responses that matter) 
+# are passed inside the second parenthesis!
 
 model = RatingsModel(WillVoteFromSampleCountPrior)(observed_counts = [4050, 3950], 
-                                                    N = 4_400_000, 
-                                                    K = 2_300_000, 
+                                                    N = 4_400_000,
+                                                    K = 2_300_000,
                                                     n = 8_000)
 
 print(model.monte_carlo_test(sample_from_prop_prior = False, 
