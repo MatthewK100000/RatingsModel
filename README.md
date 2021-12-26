@@ -277,23 +277,23 @@ from scipy import stats
 
 
 class WillVoteFromSampleCountPrior:
-  def __init__(self, N, K, n):
-    assert isinstance(N,int) # optional debugging checks
-    assert isinstance(K,int)
-    assert isinstance(n,int)
+    def __init__(self, N, K, n):
+        assert isinstance(N,int) # optional debugging checks
+        assert isinstance(K,int)
+        assert isinstance(n,int)
     
-    self.N = N
-    self.K = K
-    self.n = n
-    self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
+        self.N = N
+        self.K = K
+        self.n = n
+        self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
   
   
-  def count_rvs(self, size = 1): # must have this method!
-    assert isinstance(size, int) # optional debugging check
-    return self.dist.rvs(size = size)
+    def count_rvs(self, size = 1): # must have this method!
+        assert isinstance(size, int) # optional debugging check
+        return self.dist.rvs(size = size)
   
-  def pmf(self,k): # optional method...
-    return self.dist.pmf(k = k)
+    def pmf(self,k): # optional method...
+        return self.dist.pmf(k = k)
     
 
 # notice that the instantiation parameters for the count prior 
