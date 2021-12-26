@@ -270,7 +270,7 @@ As a final example, consider a situation where you wish to utilize your own coun
 
 In the whole state, there are 4.4 million people eligible to vote. Note that this does not necessarily mean registered; they just satisfy certain jurisdictional standards (for example, citizenry and at least X years of age). You screen your participants based on if they met these standards (to remove the ambiguity of asking children for instance).
 
-It is projected that 2.3 million will vote, and you obtain this from some regression model. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^4]. One can then filter out individuals from the list of 4090 + 3910 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4090 and 3910?
+It is projected that 2.3 million will vote, and you obtain this from some regression model[^4]. Assume an individual's chances of voting for either candidate are independent of whether or not they will vote, that is, the chances remain unaffected for those motivated to vote than those that are not, that the observed proportions will (or approximately) carry on, and that there is no bias with regards to which individuals are asked (for example, you're not selectively looking at responses only from a particular city, but statewide)[^5]. One can then filter out individuals from the list of 4090 + 3910 = 8000, so that only those who will vote remain through a [Hypergeometric(N = 4,400,000, K = 2,300,000, n = 8000)](https://en.wikipedia.org/wiki/Hypergeometric_distribution) distribution. Is there a significant difference between 4090 and 3910?
 
 ```python
 from scipy import stats
@@ -311,12 +311,14 @@ print(model.monte_carlo_test(sample_from_prop_prior = False,
                               sample_from_count_prior = True, 
                               num_samples = 10_000, 
                               confidence = 0.99))
-# outputs (0.07358808165222028, 0.08761191834777973)
 ```
 
+The above outputs (0.07358808165222028, 0.08761191834777973), so the true p-value is somewhere in this interval. The conclusion is that differences are insignificant, but teeter on significance. 
 
 
-[^4]: In real life, polling is a tricky business. Anything could happen leading up to election day that could sway the opinions of voters. While the latter assumption can be met through careful data collection, fulfilling the former two assumptions is tenuous. 
+[^4]: If the errors in the regression model are assumed to be normally distributed, then try adding gaussian noise (converting to integers) to the 2.3 million estimate, and extending the hypergeometric count prior!
+
+[^5]: In real life, polling is a tricky business. Anything could happen leading up to election day that could sway the opinions of voters. While the latter assumption can be met through careful data collection, fulfilling the former two assumptions is tenuous. 
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
