@@ -285,7 +285,10 @@ class WillVoteFromSampleCountPrior:
         self.N = N
         self.K = K
         self.n = n
-        self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n) # the variables in scipy are labeled differently...
+        
+        # the variables in scipy are labeled differently...
+        self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n)
+  
   
   
     def count_rvs(self, size = 1): # must have this method!
