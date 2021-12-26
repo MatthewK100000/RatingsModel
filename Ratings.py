@@ -215,7 +215,7 @@ def monte_carlo_test(self, count_prior = None, sample_from_count_prior = False, 
 
 
 
-def RatingsModel(count_prior = None, additional_methods = None):
+def RatingsModel_factory(count_prior = None, additional_methods = None):
 	methods = {}
 
 	for name, method in additional_methods.items():
@@ -228,7 +228,6 @@ def RatingsModel(count_prior = None, additional_methods = None):
 
 	# __init__ is called based on this implementation below since produced_cls is shared locally.
 	def RatingsModel_init(self, count_prior = count_prior, observed_counts = None, **kwargs):
-		nonlocal produced_cls
 
 		if observed_counts is None or not isinstance(observed_counts,list):
 			raise Exception("Argument 'observed_counts' must be a list of integers.")
@@ -265,7 +264,8 @@ def RatingsModel(count_prior = None, additional_methods = None):
 		elif count_prior is None:
 			pass # nothing else to be done
 		else:
-			super(produced_cls,self).__init__(**kwargs) # for custom count prior implementation
+			count_prior.__init__(self, **kwargs)  # for custom count prior implementation
+			# doesn't work: super(produced_cls, self).__init__(**kwargs)
 
 
 	methods['__init__'] = RatingsModel_init
@@ -287,10 +287,9 @@ def RatingsModel(count_prior = None, additional_methods = None):
 	return produced_cls
 
 
-RatingsModel = partial(RatingsModel,
-			additional_methods = {'from_percentages_and_total': from_percentages_and_total,
-					'exact_test': exact_test
-						}
-			)
+RatingsModel = lambda count_prior=None: RatingsModel_factory(count_prior = count_prior,
+								additional_methods = {'from_percentages_and_total': from_percentages_and_total,
+											'exact_test': exact_test}
+								)
 
 # Copyright 2021, Matthew Kulec, All rights reserved.
