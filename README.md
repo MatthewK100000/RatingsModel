@@ -100,7 +100,9 @@ It looks like there is some noticeable variability around the first and second p
 You can modify or add to the plotting parameters of this method. Refer to the [full function definition](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_ternary_contour.html). You can also make the plot interactive by running it in your web browser:
 ```python
 model.extra_plotting_params = {'colorscale':'Hot'}
-model.render_figure(element_pair = [3,4], output = 'web browser') # renders a filled ternary plot of the last 2 proportions
+
+# renders a filled ternary plot of the last 2 proportions
+model.render_figure(element_pair = [3,4], output = 'web browser')
 ```
 <p align="middle">
   <img src="images/ternary_filled.png" width="50%" height="50%" />
@@ -141,8 +143,9 @@ The ``parallel_processes`` specifies the number of process to spawn. I set this 
 Judging from how small the above exact p-value is, it looks like there is enough statistical evidence to conclude that there are significant differences between the highest voted category and all the other categories. It is expected that as we increase the ``total``, the evidence will be even stronger. We can get a sense of what the true p-value would have been, have we had more computing power, via an approximation:
 
 ```python
+# new instance of the model, using the actual num of responses
 model = RatingsModel().from_percentages_and_total(total = 32_852, 
-                            observed_percentages = [0.62, 0.18, 0.11, 0.04, 0.05]) # new instance of the model, using the actual num of responses
+                            observed_percentages = [0.62, 0.18, 0.11, 0.04, 0.05])
                             
 print(model.monte_carlo_test(sample_from_prop_prior = False, sample_from_count_prior = False, num_samples = 1_000_000))
 ```
@@ -200,7 +203,8 @@ You can sample from this pmf by calling the ``count_rvs`` or ``rvs`` method if y
 ```python
 from count_priors import RightGeometricCountPrior
 
-# the chance of sampling 199 is 80% of the chance of sampling 200. The chance of sampling 198 is 64% = (80%)^2 of the chance of sampling 200...
+# The chance of sampling 199 is 80% of the chance of sampling 200.
+# The chance of sampling 198 is 64% = (80%)^2 of the chance of sampling 200...
 total_responses_prior = RightGeometricCountPrior(200,0.8) 
 
 print(total_responses_prior.count_rvs(size = 5)) # outputs a 1-dim numpy array: [200. 199. 188. 191. 194.]
@@ -290,7 +294,6 @@ class WillVoteFromSampleCountPrior:
         self.dist = stats.hypergeom(M = self.N, n = self.K, N = self.n)
   
   
-  
     def count_rvs(self, size = 1): # must have this method!
         assert isinstance(size, int) # optional debugging check
         return self.dist.rvs(size = size)
@@ -298,6 +301,7 @@ class WillVoteFromSampleCountPrior:
     def pmf(self,k): # optional method...
         return self.dist.pmf(k = k)
     
+
 
 # notice that the instantiation parameters for the count prior (on the total responses that matter) 
 # are passed inside the second parenthesis!
@@ -322,7 +326,7 @@ The above outputs (0.07358808165222028, 0.08761191834777973), so the true p-valu
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
-  - Builtins [io](https://docs.python.org/3.6/library/io.html), [warnings](https://docs.python.org/3.6/library/warnings.html), and [functools](https://docs.python.org/3.7/library/functools.html?highlight=functools#module-functools)
+  - Builtins [io](https://docs.python.org/3.6/library/io.html) and [warnings](https://docs.python.org/3.6/library/warnings.html)
 - [NumPy](https://numpy.org/) (version 1.15.3 or greater)
 - [SciPy](https://scipy.org/) (version 1.5.4 or greater)
 - [Matplotlib](https://matplotlib.org/) (version 3.1.2 or greater)
