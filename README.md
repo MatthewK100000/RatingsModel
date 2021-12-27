@@ -7,7 +7,7 @@ Suppose you have a user ratings distribution for a product you're looking to buy
 
 This tool helps infer the answer to that question! At a high level, RatingsModel smoothes the observed counts with a multinomial distribution and calculates the probability that the sampled counts for the (observed) highest voted category are greater than the sampled counts of all the other categories, assuming the event of assigning and aggregating ratings is repeated "in alternate, independent universes" with the same (or about the same) frequencies[^1]. One minus this probability is the p-value of the test with a null hypothesis that there are no significant differences.
 
-[^1]: that is, ratings given on an individual level are "drawn out of a box" with those frequencies.
+[^1]: That is, ratings given on an individual level are "drawn out of a box" with those frequencies.
 
 ## Details on Usage and Implementation
 For situations where the total number of responses is low, the observed proportions for each category will be crude approximations, therefore a Dirichlet prior (which is conjugate to the Multinomial distribution) on the proportions may be imposed to regularize those approximations, adding noise to the proportions for each hypothetical event where individual ratings are assigned and aggregated. You do this by using the monte carlo version of the test ``monte_carlo_test``, a monte carlo approximation of the p-value, with ``sample_from_prop_prior = True``. 
@@ -20,7 +20,7 @@ For example, what if there is great incentive for every (or almost every) person
 
 [^2]: For example, suppose you have a turnout of 100. A difference of 30 between the two highest voted categories seems significant. Now, what if the turnout is 500? It may be hard to tell if 30 is a big difference on this scale. 
 
-[^3]: your count prior class must have a ``count_rvs()`` method with an argument called ``size``, specifying the number of samples to draw. The input is an integer, and output must be a one-dimensional numpy array of random variables. 
+[^3]: Your count prior class must have a ``count_rvs()`` method with an argument called ``size``, specifying the number of samples to draw. The input is an integer, and output must be a one-dimensional numpy array of random variables. 
 
 ## Examples
 ### Header
