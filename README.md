@@ -326,7 +326,7 @@ The above outputs (0.07358808165222028, 0.08761191834777973), so the true p-valu
 
 ## Recommended Dependencies
 - Python (3.6.4 or greater)
-  - Builtins [io](https://docs.python.org/3.6/library/io.html) and [warnings](https://docs.python.org/3.6/library/warnings.html)
+  - Builtins [io](https://docs.python.org/3.6/library/io.html), [warnings](https://docs.python.org/3.6/library/warnings.html) and [multiprocessing](https://docs.python.org/3.6/library/multiprocessing.html)
 - [NumPy](https://numpy.org/) (version 1.15.3 or greater)
 - [SciPy](https://scipy.org/) (version 1.5.4 or greater)
 - [Matplotlib](https://matplotlib.org/) (version 3.1.2 or greater)
