@@ -317,7 +317,7 @@ print(model.monte_carlo_test(sample_from_prop_prior = False,
                               confidence = 0.99))
 ```
 
-The above outputs (0.07358808165222028, 0.08761191834777973), so the true p-value is somewhere in this interval. The conclusion is that differences are insignificant, but teeter on significance. 
+The above outputs (0.06754466923741775, 0.08105533076258231), so the true p-value is somewhere in this interval. The conclusion is that differences are insignificant, but teeter on significance. 
 
 
 [^4]: If the errors in the regression model are assumed to be normally distributed, then try adding gaussian noise (converting to integers) to the 2.3 million estimate, and extending the hypergeometric count prior by adding a hyperprior on the parameter N.
