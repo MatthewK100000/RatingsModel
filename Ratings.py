@@ -2,7 +2,6 @@ from proportion_priors import DirichletProportionsPrior
 from count_priors import RightGeometricCountPrior
 
 import multiprocessing
-from functools import partial
 import warnings
 
 from scipy import stats
