@@ -290,5 +290,3 @@ RatingsModel = lambda count_prior=None: RatingsModel_factory(count_prior = count
 								additional_methods = {'from_percentages_and_total': from_percentages_and_total,
 											'exact_test': exact_test}
 								)
-
-# Copyright 2021, Matthew Kulec, All rights reserved.
