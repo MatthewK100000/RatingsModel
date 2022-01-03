@@ -111,6 +111,3 @@ class RightGeometricCountPrior:
 				raise Exception("Bisection method is the last resort after Newton's method, and the root finder did not converge.")
 
 		return root
-
-
-# Copyright 2021, Matthew Kulec, All rights reserved.
