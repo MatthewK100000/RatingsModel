@@ -119,6 +119,3 @@ class DirichletProportionsPrior(TernaryPlotMixin):
 
 	def mode(self):
 		return [(arg - 1)/(sum(self.alpha) - len(self.alpha)) for arg in self.alpha]
-
-
-# Copyright 2021, Matthew Kulec, All rights reserved.
