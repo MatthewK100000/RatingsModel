@@ -34,8 +34,11 @@ modification, are permitted provided that the above and following conditions are
 3. All advertising materials mentioning features or use of this software must
    display the following acknowledgement:
      This product includes software sourced from RatingsModel, a GitHub repository.
-
-4. Neither the name of the copyright holder nor the names of its
+     
+4. The origin of this software must not be misrepresented; you must not
+   claim that you wrote the original software.
+   
+5. Neither the name of the copyright holder nor the names of its
    contributors may be used to endorse or promote products derived from
    this software without specific prior written permission.
 
