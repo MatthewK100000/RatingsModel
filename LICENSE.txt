@@ -18,7 +18,7 @@ Software: RatingsModel
 
 Licensor: Matthew Kulec
 
-License: Slightly modified version of the BSD 4-Clause "Original" or "Old" License, as defined by the following:
+License: As defined by the following:
 
 
 Redistribution and use in source and binary forms, with or without
