@@ -1,6 +1,7 @@
 # RatingsModel
 A Bayesian hypothesis testing tool which determines the significance of user rating differences.
 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 ## Background
 Suppose you have a user ratings distribution for a product you're looking to buy, or maybe the responses from a survey you've conducted. Given the counts for each category, how does one assess the significance of the differences between these counts? 
