@@ -337,5 +337,5 @@ The above outputs (0.06754466923741775, 0.08105533076258231), so the true p-valu
 - [Plotly](https://plotly.com/) (version 5.3.1 or greater)
 
 ## Underlying Mathematics
-Since github markdown does not currently support latex formulas, you may view the mathematical appendix and in-depth API guide [here](https://github.com/MatthewK100000/RatingsModel/blob/main/mathematical_background.pdf).
+Since github markdown does not currently support latex formulas, you may view the mathematical appendix and in-depth API guide [here](https://github.com/MatthewK100000/RatingsModel/blob/main/Math/mathematical_background_v1.1.pdf).
 
